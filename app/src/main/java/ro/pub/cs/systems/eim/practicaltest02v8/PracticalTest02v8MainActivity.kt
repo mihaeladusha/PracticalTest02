@@ -1,5 +1,6 @@
 package ro.pub.cs.systems.eim.practicaltest02v8
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
@@ -42,13 +43,16 @@ class PracticalTest02v8MainActivity : AppCompatActivity() {
         }
 
         navigateButton.setOnClickListener {
-            // Implement navigation to Activity 2
+            val intent = Intent(this, CalculatorActivity::class.java)
+            startActivity(intent)
         }
     }
 
     private fun fetchBitcoinRate(currency: String) {
         val currentTime = System.currentTimeMillis()
         val cachedData = cache[currency]
+
+        Log.d("PracticalTest02v8", "Checking cache for $currency: $cachedData")
 
         if (cachedData != null && currentTime - cachedData.second < 60000) {
             resultTextView.text = "Rate: ${cachedData.first}\nCached"
